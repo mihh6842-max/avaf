@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ваш план - Modern Style</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        .header h1 {
+            color: #667eea;
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: #666;
+            font-size: 16px;
+        }
+
+        .plan-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            animation: slideUp 0.5s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .meal-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #667eea;
+        }
+
+        .meal-icon {
+            font-size: 36px;
+            margin-right: 15px;
+        }
+
+        .meal-title {
+            font-size: 24px;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .meal-content {
+            line-height: 1.8;
+            color: #555;
+            font-size: 16px;
+        }
+
+        .meal-content p {
+            margin-bottom: 10px;
+        }
+
+        .calories-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-weight: 600;
+            margin-top: 15px;
+            font-size: 14px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .stat-box {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .footer {
+            text-align: center;
+            color: white;
+            margin-top: 30px;
+            font-size: 14px;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎯 Ваш план готов!</h1>
+            <p>Следуйте этому плану для достижения ваших целей</p>
+        </div>
+
+        <div class="plan-card">
+            <div class="meal-header">
+                <div class="meal-icon">🍳</div>
+                <div class="meal-title">Завтрак</div>
+            </div>
+            <div class="meal-content">
+                <p><strong>Овсяная каша с ягодами</strong></p>
+                <p>• 80г овсяных хлопьев</p>
+                <p>• 200мл молока 2.5%</p>
+                <p>• 100г свежих ягод</p>
+                <p>• 1 ст.л. меда</p>
+                <span class="calories-badge">🔥 420 ккал</span>
+            </div>
+        </div>
+
+        <div class="plan-card">
+            <div class="meal-header">
+                <div class="meal-icon">🥗</div>
+                <div class="meal-title">Обед</div>
+            </div>
+            <div class="meal-content">
+                <p><strong>Куриная грудка с овощами</strong></p>
+                <p>• 200г куриной грудки</p>
+                <p>• 150г бурого риса</p>
+                <p>• 200г овощей на пару</p>
+                <p>• Оливковое масло для заправки</p>
+                <span class="calories-badge">🔥 580 ккал</span>
+            </div>
+        </div>
+
+        <div class="plan-card">
+            <div class="meal-header">
+                <div class="meal-icon">🍽️</div>
+                <div class="meal-title">Ужин</div>
+            </div>
+            <div class="meal-content">
+                <p><strong>Запеченная рыба с салатом</strong></p>
+                <p>• 180г лосося</p>
+                <p>• 200г овощного салата</p>
+                <p>• 100г киноа</p>
+                <p>• Лимон и зелень</p>
+                <span class="calories-badge">🔥 520 ккал</span>
+            </div>
+        </div>
+
+        <div class="plan-card">
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <div class="stat-value">2000</div>
+                    <div class="stat-label">Калории</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value">150г</div>
+                    <div class="stat-label">Белки</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value">200г</div>
+                    <div class="stat-label">Углеводы</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value">60г</div>
+                    <div class="stat-label">Жиры</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>💪 Создано с помощью AI-помощника</p>
+        </div>
+    </div>
+</body>
+</html>

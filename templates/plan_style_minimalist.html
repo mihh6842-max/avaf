@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ваш план - Minimalist Style</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background: #f5f5f5;
+            padding: 40px 20px;
+            color: #1a1a1a;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: white;
+            padding: 60px 50px;
+            box-shadow: 0 0 60px rgba(0, 0, 0, 0.08);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .header h1 {
+            font-size: 36px;
+            font-weight: 300;
+            letter-spacing: -1px;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 14px;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .meal-section {
+            margin-bottom: 50px;
+            padding-bottom: 40px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .meal-section:last-of-type {
+            border-bottom: none;
+        }
+
+        .meal-time {
+            font-size: 12px;
+            color: #999;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+        }
+
+        .meal-name {
+            font-size: 24px;
+            font-weight: 400;
+            margin-bottom: 20px;
+            color: #1a1a1a;
+        }
+
+        .meal-items {
+            list-style: none;
+            margin-bottom: 20px;
+        }
+
+        .meal-items li {
+            padding: 10px 0;
+            border-bottom: 1px solid #f5f5f5;
+            font-size: 16px;
+            color: #555;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .meal-items li:last-child {
+            border-bottom: none;
+        }
+
+        .item-name {
+            flex: 1;
+        }
+
+        .item-amount {
+            color: #999;
+            font-size: 14px;
+        }
+
+        .calories {
+            display: inline-block;
+            padding: 8px 20px;
+            background: #1a1a1a;
+            color: white;
+            font-size: 13px;
+            letter-spacing: 1px;
+            font-weight: 500;
+        }
+
+        .summary {
+            margin-top: 60px;
+            padding-top: 40px;
+            border-top: 2px solid #1a1a1a;
+        }
+
+        .summary-title {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 30px;
+            color: #1a1a1a;
+        }
+
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .summary-item {
+            text-align: center;
+        }
+
+        .summary-value {
+            font-size: 32px;
+            font-weight: 300;
+            color: #1a1a1a;
+            margin-bottom: 10px;
+        }
+
+        .summary-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #999;
+        }
+
+        .footer {
+            margin-top: 60px;
+            text-align: center;
+            font-size: 11px;
+            color: #bbb;
+            letter-spacing: 1px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 40px 30px;
+            }
+
+            .summary-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Ваш план питания</h1>
+            <p>Индивидуальный подход</p>
+        </div>
+
+        <div class="meal-section">
+            <div class="meal-time">07:00 — Завтрак</div>
+            <div class="meal-name">Овсяная каша с ягодами</div>
+            <ul class="meal-items">
+                <li>
+                    <span class="item-name">Овсяные хлопья</span>
+                    <span class="item-amount">80г</span>
+                </li>
+                <li>
+                    <span class="item-name">Молоко 2.5%</span>
+                    <span class="item-amount">200мл</span>
+                </li>
+                <li>
+                    <span class="item-name">Свежие ягоды</span>
+                    <span class="item-amount">100г</span>
+                </li>
+                <li>
+                    <span class="item-name">Мед</span>
+                    <span class="item-amount">1 ст.л.</span>
+                </li>
+            </ul>
+            <span class="calories">420 ККАЛ</span>
+        </div>
+
+        <div class="meal-section">
+            <div class="meal-time">13:00 — Обед</div>
+            <div class="meal-name">Куриная грудка с овощами</div>
+            <ul class="meal-items">
+                <li>
+                    <span class="item-name">Куриная грудка</span>
+                    <span class="item-amount">200г</span>
+                </li>
+                <li>
+                    <span class="item-name">Бурый рис</span>
+                    <span class="item-amount">150г</span>
+                </li>
+                <li>
+                    <span class="item-name">Овощи на пару</span>
+                    <span class="item-amount">200г</span>
+                </li>
+                <li>
+                    <span class="item-name">Оливковое масло</span>
+                    <span class="item-amount">10мл</span>
+                </li>
+            </ul>
+            <span class="calories">580 ККАЛ</span>
+        </div>
+
+        <div class="meal-section">
+            <div class="meal-time">19:00 — Ужин</div>
+            <div class="meal-name">Запеченная рыба с салатом</div>
+            <ul class="meal-items">
+                <li>
+                    <span class="item-name">Лосось</span>
+                    <span class="item-amount">180г</span>
+                </li>
+                <li>
+                    <span class="item-name">Овощной салат</span>
+                    <span class="item-amount">200г</span>
+                </li>
+                <li>
+                    <span class="item-name">Киноа</span>
+                    <span class="item-amount">100г</span>
+                </li>
+                <li>
+                    <span class="item-name">Лимон и зелень</span>
+                    <span class="item-amount">по вкусу</span>
+                </li>
+            </ul>
+            <span class="calories">520 ККАЛ</span>
+        </div>
+
+        <div class="summary">
+            <div class="summary-title">Итоги дня</div>
+            <div class="summary-grid">
+                <div class="summary-item">
+                    <div class="summary-value">2000</div>
+                    <div class="summary-label">Калории</div>
+                </div>
+                <div class="summary-item">
+                    <div class="summary-value">150г</div>
+                    <div class="summary-label">Белки</div>
+                </div>
+                <div class="summary-item">
+                    <div class="summary-value">200г</div>
+                    <div class="summary-label">Углеводы</div>
+                </div>
+                <div class="summary-item">
+                    <div class="summary-value">60г</div>
+                    <div class="summary-label">Жиры</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            AI-GENERATED NUTRITION PLAN
+        </div>
+    </div>
+</body>
+</html>

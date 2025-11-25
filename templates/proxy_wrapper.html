@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>План питания загружается...</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .loader-container {
+            text-align: center;
+            color: white;
+        }
+
+        .loader {
+            width: 60px;
+            height: 60px;
+            border: 5px solid rgba(255, 255, 255, 0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        p {
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+    <div class="loader-container">
+        <div class="loader"></div>
+        <h2>Загрузка плана питания...</h2>
+        <p>Пожалуйста, подождите</p>
+    </div>
+
+    <script>
+        // Получаем имя файла плана из URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const planFile = urlParams.get('plan');
+
+        if (planFile) {
+            // Перенаправляем напрямую на локальный файл
+            // Telegram Web App может загружать контент напрямую
+            setTimeout(() => {
+                window.location.href = '/static/plans/' + planFile;
+            }, 500);
+        } else {
+            document.querySelector('.loader-container').innerHTML = '<h2>❌ Ошибка</h2><p>План не найден</p>';
+        }
+    </script>
+</body>
+</html>

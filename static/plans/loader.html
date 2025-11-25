@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Загрузка плана...</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        .loader-container {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .loader {
+            width: 60px;
+            height: 60px;
+            border: 5px solid rgba(255, 255, 255, 0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        p {
+            opacity: 0.9;
+            font-size: 14px;
+        }
+
+        .error {
+            background: rgba(255, 0, 0, 0.2);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="loader-container" id="content">
+        <div class="loader"></div>
+        <h2>Загрузка плана питания...</h2>
+        <p>Пожалуйста, подождите</p>
+    </div>
+
+    <script>
+        // Получаем параметр файла из URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const planFile = urlParams.get('file');
+
+        if (!planFile) {
+            document.getElementById('content').innerHTML = `
+                <div class="error">
+                    <h2>❌ Ошибка</h2>
+                    <p>Файл плана не указан</p>
+                </div>
+            `;
+        } else {
+            // Загружаем план через fetch с заголовком для обхода ngrok
+            const planUrl = `https://atrophied-potenty-gertie.ngrok-free.dev/static/plans/${planFile}`;
+
+            fetch(planUrl, {
+                headers: {
+                    'ngrok-skip-browser-warning': 'true'
+                }
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Не удалось загрузить план');
+                }
+                return response.text();
+            })
+            .then(html => {
+                // Заменяем содержимое страницы на загруженный HTML
+                document.open();
+                document.write(html);
+                document.close();
+            })
+            .catch(error => {
+                console.error('Ошибка загрузки:', error);
+                document.getElementById('content').innerHTML = `
+                    <div class="error">
+                        <h2>❌ Ошибка загрузки</h2>
+                        <p>${error.message}</p>
+                        <p style="margin-top: 10px; font-size: 12px;">URL: ${planUrl}</p>
+                    </div>
+                `;
+            });
+        }
+    </script>
+</body>
+</html>

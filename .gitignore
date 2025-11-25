@@ -1,0 +1,31 @@
+# Python
+*.db
+*.pyc
+__pycache__/
+*.log
+
+# Environment
+.env
+
+# Data directories
+data/
+book/
+
+# Node
+node_modules/
+
+# Deployment
+.vercel
+
+# Temporary files
+*.backup
+nul
+test_*.txt
+test_*.html
+
+# Claude AI
+.claude/
+
+# Database files (не публикуем пользовательские данные)
+database.json
+workout_history.json
