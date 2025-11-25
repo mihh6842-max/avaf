@@ -1117,7 +1117,26 @@ class AIGenerator:
 
                 logger.info(f"HTML план сохранен: {filepath}")
 
-                # Автозагрузка на Netlify
+                # Автоматический push на GitHub Pages
+                try:
+                    import subprocess
+                    import os
+
+                    # Добавляем файл в git
+                    subprocess.run(["git", "add", filepath], check=False, capture_output=True)
+
+                    # Коммитим
+                    commit_msg = f"Add meal plan for user {user_id}"
+                    subprocess.run(["git", "commit", "-m", commit_msg], check=False, capture_output=True)
+
+                    # Пушим в фоне (не ждем завершения)
+                    subprocess.Popen(["git", "push"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+
+                    logger.info(f"✅ План добавлен в git и отправлен на GitHub Pages")
+                except Exception as e:
+                    logger.warning(f"⚠️ Не удалось отправить на GitHub: {e}")
+
+                # Автозагрузка на Netlify (старый код, оставляем для совместимости)
                 try:
                     import requests as req
                     import base64
@@ -4018,32 +4037,34 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
             safe_plan = final_clean_text(plan)
 
-            # Загружаем план на Telegraph и создаем Web App кнопку
+            # Создаем кнопку со ссылкой на GitHub Pages
             user = db.get_user(user_id)
             keyboard = []
 
-            logger.info(f"Проверка Telegraph: user={user is not None}, last_plan_html={user.get('last_plan_html') if user else None}")
+            logger.info(f"Проверка плана: user={user is not None}, last_plan_html={user.get('last_plan_html') if user else None}")
 
             if user and user.get('last_plan_html'):
                 try:
-                    # Отправляем HTML как документ
-                    with open(user['last_plan_html'], 'rb') as f:
-                        doc_caption = {
-                            'ru': '📱 Ваш план готов!\n\n💡 Откройте файл в браузере или любом устройстве для красивого просмотра.',
-                            'en': '📱 Your plan is ready!\n\n💡 Open the file in browser or any device for beautiful view.',
-                            'uz': '📱 Rejangiz tayyor!\n\n💡 Chiroyli ko\'rish uchun faylni brauzerda oching.'
-                        }
+                    # Получаем URL на GitHub Pages
+                    from web_server import web_server
+                    plan_url = web_server.get_url(user['last_plan_html'])
 
-                        await update.message.reply_document(
-                            document=f,
-                            filename='nutrition_plan.html',
-                            caption=doc_caption.get(lang, doc_caption['ru'])
-                        )
+                    # Добавляем кнопку для открытия плана
+                    open_plan_text = {
+                        'ru': '📱 Открыть план в приложении',
+                        'en': '📱 Open plan in app',
+                        'uz': '📱 Rejani ochish'
+                    }
 
-                    logger.info(f"✅ HTML план отправлен как файл")
+                    keyboard.insert(0, [InlineKeyboardButton(
+                        open_plan_text.get(lang, open_plan_text['ru']),
+                        url=plan_url
+                    )])
+
+                    logger.info(f"✅ Ссылка на план создана: {plan_url}")
 
                 except Exception as e:
-                    logger.error(f"❌ Ошибка отправки файла: {e}")
+                    logger.error(f"❌ Ошибка создания ссылки: {e}")
                     import traceback
                     logger.error(traceback.format_exc())
 
